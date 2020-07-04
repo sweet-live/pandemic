@@ -1,0 +1,12 @@
+{
+  "name": "pandemic",
+  "displayName": "pandemic",
+  "expo": {
+    "name": "pandemic",
+    "slug": "pandemic",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
