@@ -10,6 +10,10 @@ import {
 import BoostsIcon from '../assets/svg/BoostsIcon';
 import DiamondIcon from '../assets/svg/DiamondIcon';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import {
+	calculateResponsiveHeight,
+	calculateResponsiveWidth,
+} from '../utils/responsive';
 
 interface BoostsI {
 	title: string;
@@ -126,88 +130,6 @@ const Boosts = () => {
 						);
 					}}
 				/>
-
-				{/* <View style={styles.boostsbox}>
-					<View style={styles.boostsinfo}>
-						<Text style={styles.boostdesc}>All proffits x5</Text>
-						<View style={styles.boostprice}>
-							<Text style={styles.pricetext}>Price:</Text>
-							<DiamondIcon height={9} fill='#4ac1f9' />
-							<Text style={styles.price}>25</Text>
-						</View>
-					</View>
-					<TouchableHighlight
-						underlayColor='#1a5063'
-						activeOpacity={0.5}
-						style={styles.boostbutton}
-						onPress={() => alert('Pressed!')}
-					>
-						<Text style={styles.upgradetext}>UPGRADE</Text>
-					</TouchableHighlight>
-				</View>
-				<View style={styles.boostsbox}>
-					<View style={styles.boostsinfo}>
-						<Text style={styles.boostdesc}>All proffits x10</Text>
-						<View style={styles.boostprice}>
-							<Text style={styles.pricetext}>Price:</Text>
-							<DiamondIcon height={9} fill='#4ac1f9' />
-							<Text style={styles.price}>45</Text>
-							<View style={styles.discountbox}>
-								<Text style={styles.discounttext}>Save -20%</Text>
-							</View>
-						</View>
-					</View>
-					<TouchableHighlight
-						underlayColor='#1a5063'
-						activeOpacity={0.5}
-						style={styles.boostbutton}
-						onPress={() => alert('Pressed!')}
-					>
-						<Text style={styles.upgradetext}>UPGRADE</Text>
-					</TouchableHighlight>
-				</View>
-				<View style={styles.boostsbox}>
-					<View style={styles.boostsinfo}>
-						<Text style={styles.boostdesc}>All proffits x20</Text>
-						<View style={styles.boostprice}>
-							<Text style={styles.pricetext}>Price:</Text>
-							<DiamondIcon height={9} fill='#4ac1f9' />
-							<Text style={styles.price}>80</Text>
-							<View style={styles.discountbox}>
-								<Text style={styles.discounttext}>Save -10%</Text>
-							</View>
-						</View>
-					</View>
-					<TouchableHighlight
-						underlayColor='#1a5063'
-						activeOpacity={0.5}
-						style={styles.boostbutton}
-						onPress={() => alert('Pressed!')}
-					>
-						<Text style={styles.upgradetext}>UPGRADE</Text>
-					</TouchableHighlight>
-				</View>
-				<View style={styles.boostsbox}>
-					<View style={styles.boostsinfo}>
-						<Text style={styles.boostdesc}>5 lvl of vaccine</Text>
-						<View style={styles.boostprice}>
-							<Text style={styles.pricetext}>Price:</Text>
-							<DiamondIcon height={9} fill='#4ac1f9' />
-							<Text style={styles.price}>100</Text>
-							<View style={styles.discountbox2}>
-								<Text style={styles.discounttext}>Save -50%</Text>
-							</View>
-						</View>
-					</View>
-					<TouchableHighlight
-						underlayColor='#1a5063'
-						activeOpacity={0.5}
-						style={styles.boostbutton}
-						onPress={() => alert('Pressed!')}
-					>
-						<Text style={styles.upgradetext}>UPGRADE</Text>
-					</TouchableHighlight>
-				</View>*/}
 			</View>
 		</View>
 	);
@@ -218,25 +140,25 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#485378',
 		color: 'black',
-		padding: 5,
-		paddingBottom: 0,
+		padding: calculateResponsiveHeight(5),
+    paddingBottom: 0,
+    paddingTop: calculateResponsiveHeight(30)
 	},
 	title: {
 		alignItems: 'center',
 		flexDirection: 'row',
-		justifyContent: 'space-between',
-		paddingLeft: 135,
-		paddingRight: 135,
-		marginTop: 21,
+		justifyContent: 'center',
+		marginTop: calculateResponsiveHeight(21),
 	},
 	titletext: {
 		fontFamily: 'Montserrat-Bold',
 		color: '#fff',
-		fontSize: 18,
+    fontSize: calculateResponsiveHeight(18),
+    marginLeft: calculateResponsiveWidth(10)
 	},
 	boosticon: {
 		alignItems: 'center',
-		marginTop: 3,
+		marginTop: calculateResponsiveHeight(3),
 	},
 	boostbutton: {
 		alignItems: 'center',
@@ -246,12 +168,12 @@ const styles = StyleSheet.create({
 		height: 39,
 		borderRadius: 7,
 		marginRight: 15,
-		shadowColor: 'red',
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.8,
+		shadowColor: '#fff',
+		shadowOffset: { width: -2, height: 1 },
+		shadowOpacity: 0,
 		shadowRadius: 2,
-		elevation: 5,
-	},
+		elevation: 8,
+	}, 
 
 	upgradetext: {
 		fontFamily: 'Montserrat-Bold',
@@ -308,7 +230,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		width: 69,
-		height: 17,
+		height: 16,
 		backgroundColor: '#48c665',
 		borderRadius: 7,
 		marginLeft: 5,
