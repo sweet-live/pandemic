@@ -1,3 +1,3 @@
-import Home from './Home';
-
-export { Home };
+import Home from "./Home";
+import Boosts from "./Boosts";
+export { Home, Boosts };
