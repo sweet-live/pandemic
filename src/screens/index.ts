@@ -1,3 +1,5 @@
 import Home from "./Home";
 import Boosts from "./Boosts";
-export { Home, Boosts };
+import Quests from "./Quests";
+import Bonuses from "./Bonuses";
+export { Home, Boosts, Quests, Bonuses };

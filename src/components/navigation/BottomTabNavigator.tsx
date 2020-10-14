@@ -25,11 +25,20 @@ const BottomTabNavigator: React.FunctionComponent<BottomTabNavigatorI> = ({
 	});
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.tab}>
-				<SettingsIcon height={18} />
+			<TouchableOpacity style={styles.tab}
+			onPress={() => {
+				navigation.navigate('Quests');
+			}}>
+				<SettingsIcon height={18}
+				fill={current === 'Quests' ? '#ff685c' : undefined} />
 			</TouchableOpacity>
-			<TouchableOpacity style={styles.tab}>
-				<ShopIcon height={18} />
+			<TouchableOpacity style={styles.tab}
+				onPress={() => {
+				navigation.navigate('Bonuses');
+			}}>
+
+				<ShopIcon height={18}
+				fill={current === 'Bonuses' ? '#ff685c' : undefined} />
 			</TouchableOpacity>
 			<TouchableOpacity
 				style={styles.tab}
