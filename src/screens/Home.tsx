@@ -1,5 +1,12 @@
 import React, { ReactComponentElement } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import DiamondIcon from "../assets/svg/DiamondIcon";
 import PlussIcon from "../assets/svg/PlussIcon";
 import BloodIcon from "../assets/svg/BloodIcon";
@@ -8,10 +15,22 @@ import HealthIcon from "../assets/svg/stats/HealthIcon";
 import DollarIcon from "../assets/svg/stats/DollarIcon";
 import SyringeIcon from "../assets/svg/stats/SyringeIcon";
 import BoostIcon from "../assets/svg/stats/BoostsIcon";
-import { calculateResponsiveHeight } from "../utils/responsive";
+import {
+  calculateResponsiveHeight,
+  calculateResponsiveWidth,
+} from "../utils/responsive";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import BookIcon from "../assets/svg/stats/BookIcon";
 import WheelIcon from "../assets/svg/WheelIcon";
+import PaperClipIcon from "../assets/svg/PaperClipIcon";
+import { processFontFamily } from "expo-font";
+import LoadingBar from "../components/utilities/LoadingBar";
+import Button from "../components/utilities/Button";
+import EmployeeIcon from "../assets/svg/EmployeeIcon";
+import BuildingContainer from "../components/BuildingContainer";
+
+//Images
+import doctor from "../assets/images/doctor.png";
 
 // interface UpgradeBuildingsI {
 // 	title: string;
@@ -34,6 +53,7 @@ export default function Home() {
   // 		}]
   // 	}
   // ]
+
   const iconDim = calculateResponsiveHeight(18);
   const plusDim = calculateResponsiveHeight(10);
   return (
@@ -118,25 +138,152 @@ export default function Home() {
           <View style={styles.actionBox}>
             <View style={styles.actionTop}>
               <View style={styles.actionImage}>
-                <Image
-                  source={require("../assets/images/placeholder_action.png")}
-                  style={{ width: "100%", height: "100%" }}
-                />
+                <TouchableOpacity>
+                  <ImageBackground
+                    source={require("../assets/images/placeholder_action.png")}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <PaperClipIcon height={calculateResponsiveHeight(18)} />
+                    <Text style={styles.upgradePushText}>Tap to start</Text>
+                  </ImageBackground>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.infoContainer}>
+                <Text style={styles.itemTitle}>Vaccine</Text>
+                <Text style={styles.textCategory}>
+                  Level: <Text style={styles.textInfo}>19</Text>
+                </Text>
+                <Text style={styles.textCategory}>
+                  Results: <Text style={styles.textInfo}>100 vaccines</Text> per
+                  click
+                </Text>
+                <View style={{ marginTop: calculateResponsiveHeight(7) }}>
+                  <LoadingBar
+                    width={187}
+                    height={4}
+                    current={70}
+                    total={100}
+                    backgroundColor="#48527b"
+                  />
+                </View>
+                <View style={styles.underProgressBar}>
+                  <Text
+                    style={[
+                      styles.textCategory,
+                      { fontSize: calculateResponsiveHeight(8) },
+                    ]}
+                  >
+                    0%
+                  </Text>
+                  <Text
+                    style={[
+                      styles.textInfo,
+                      { fontSize: calculateResponsiveHeight(8) },
+                    ]}
+                  >
+                    0h 1m 19s
+                  </Text>
+                  <Text
+                    style={[
+                      styles.textCategory,
+                      { fontSize: calculateResponsiveHeight(8) },
+                    ]}
+                  >
+                    100%
+                  </Text>
+                </View>
               </View>
             </View>
             <View />
-          </View>
-          <View style={styles.actionBox}>
-            <View style={styles.actionTop}>
-              <View style={styles.actionImage}>
-                <Image
-                  source={require("../assets/images/placeholder_action.png")}
-                  style={{ width: "100%", height: "100%" }}
-                />
+            <View style={styles.actionBottom}>
+              <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: calculateResponsiveHeight(7),
+                      fontFamily: "Montserrat-Bold",
+                      color: "#fff",
+                    }}
+                  >
+                    UPGRADE PRICE:
+                  </Text>
+
+                  <Text
+                    style={{
+                      marginLeft: calculateResponsiveWidth(5),
+                      fontSize: calculateResponsiveHeight(14),
+                      fontFamily: "Montserrat-Bold",
+                      color: "#fff",
+                    }}
+                  >
+                    $10,000
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: 4,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: calculateResponsiveHeight(7),
+                      fontFamily: "Montserrat-Bold",
+                      color: "#fff",
+                      marginRight: calculateResponsiveWidth(5),
+                    }}
+                  >
+                    EMPLOYEES:
+                  </Text>
+                  <EmployeeIcon
+                    d={calculateResponsiveWidth(15)}
+                    fill="#48c665"
+                    marginRight={calculateResponsiveWidth(5)}
+                  />
+                  <EmployeeIcon
+                    d={calculateResponsiveWidth(15)}
+                    fill="#fff"
+                    marginRight={calculateResponsiveWidth(5)}
+                  />
+                  <EmployeeIcon d={calculateResponsiveWidth(15)} fill="#fff" />
+                </View>
               </View>
+
+              <Button
+                onPress={() => {}}
+                text="UPGRADE"
+                containerStyles={{
+                  width: calculateResponsiveWidth(125),
+                  height: calculateResponsiveHeight(39),
+                }}
+              ></Button>
             </View>
-            <View />
           </View>
+
+          <BuildingContainer
+            title="Medicine Point"
+            level={19}
+            result1Text="Saving: "
+            result1="20 people per click"
+            result2Text="Earnings: "
+            result2="$550 per min"
+            timeNow={70}
+            timeTotal={100}
+            employees={0}
+            upgradePrice={140000}
+            picture={doctor}
+          ></BuildingContainer>
           <View style={styles.actionBox}>
             <View style={styles.actionTop}>
               <View style={styles.actionImage}>
@@ -177,6 +324,33 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
+  underProgressBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  textCategory: {
+    fontFamily: "Montserrat",
+    fontSize: calculateResponsiveHeight(10),
+    color: "#fff",
+  },
+  textInfo: {
+    fontFamily: "Montserrat-Bold",
+    color: "#fff",
+  },
+  infoContainer: {
+    justifyContent: "center",
+    marginLeft: calculateResponsiveWidth(10),
+  },
+  itemTitle: {
+    fontSize: calculateResponsiveHeight(13),
+    fontFamily: "Montserrat-Bold",
+    color: "#fff",
+  },
+  upgradePushText: {
+    fontFamily: "Montserrat-Bold",
+    fontSize: calculateResponsiveHeight(10),
+    color: "#fff",
+  },
   container: {
     flex: 1,
     backgroundColor: "#485378",
@@ -184,78 +358,78 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   currencies: {
-    marginTop: 35,
-    marginBottom: 10,
-    height: 30,
+    marginTop: calculateResponsiveHeight(35),
+    marginBottom: calculateResponsiveHeight(10),
+    height: calculateResponsiveHeight(30),
     flexDirection: "row",
   },
   currenciesItem: {
     backgroundColor: "#65729a",
     width: "32%",
     marginRight: "2%",
-    borderRadius: 10,
+    borderRadius: calculateResponsiveHeight(10),
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingLeft: 10,
-    paddingRight: 3,
+    paddingLeft: calculateResponsiveWidth(10),
+    paddingRight: calculateResponsiveWidth(3),
   },
   currenciesItemValue: {
     color: "#fff",
-    fontSize: 13,
+    fontSize: calculateResponsiveHeight(13),
     fontFamily: "Montserrat-Bold",
   },
   currenciesAddCurrency: {
-    width: 24,
-    height: 24,
-    borderRadius: 7,
+    width: calculateResponsiveWidth(24),
+    height: calculateResponsiveHeight(24),
+    borderRadius: calculateResponsiveHeight(7),
     borderWidth: 2,
     borderColor: "#536087",
     alignItems: "center",
     justifyContent: "center",
   },
   player: {
-    height: 65,
+    height: calculateResponsiveHeight(65),
     backgroundColor: "#65729a",
-    borderRadius: 10,
+    borderRadius: calculateResponsiveHeight(10),
     padding: 5,
     overflow: "hidden",
     flexDirection: "row",
   },
   playerImage: {
-    width: 55,
-    borderRadius: 10,
+    width: calculateResponsiveWidth(55),
+    borderRadius: calculateResponsiveHeight(10),
   },
   playerInfo: {
-    marginLeft: 10,
+    marginLeft: calculateResponsiveWidth(10),
   },
   infectedAmmount: {
-    paddingVertical: 4,
+    paddingVertical: calculateResponsiveHeight(4),
     flexDirection: "row",
     //alignItems: 'center'
   },
   infectedNumber: {
     fontFamily: "Montserrat-Bold",
     color: "#fff",
-    fontSize: 18,
+    fontSize: calculateResponsiveHeight(18),
   },
   infectedText: {
-    fontSize: 10,
+    fontSize: calculateResponsiveHeight(10),
     fontFamily: "Montserrat",
     textAlignVertical: "bottom",
     color: "#fff",
-    lineHeight: 19,
+    lineHeight: calculateResponsiveHeight(19),
   },
   infectedIcon: {
-    width: 24,
-    height: 24,
+    width: calculateResponsiveWidth(24),
+    height: calculateResponsiveHeight(24),
     backgroundColor: "#ff685c",
-    borderRadius: 7,
-    lineHeight: 22,
+    borderRadius: calculateResponsiveHeight(7),
+    lineHeight: calculateResponsiveHeight(22),
     alignItems: "center",
     justifyContent: "center",
     textAlignVertical: "center",
-    marginRight: 5,
+    marginRight: calculateResponsiveWidth(5),
   },
   playerStats: {
     flexDirection: "row",
@@ -263,45 +437,52 @@ const styles = StyleSheet.create({
   playerStatsItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 15,
+    marginRight: calculateResponsiveWidth(15),
   },
   statsNumber: {
     fontFamily: "Montserrat-Bold",
     color: "#fff",
-    fontSize: 15,
+    fontSize: calculateResponsiveHeight(15),
   },
   gameScreen: {
     flex: 1,
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: calculateResponsiveHeight(10),
   },
   sideMenu: {
-    width: 60,
+    width: calculateResponsiveWidth(60),
   },
   sideMenuItem: {
-    width: 50,
-    height: 50,
+    width: calculateResponsiveWidth(50),
+    height: calculateResponsiveWidth(50),
     borderWidth: 2,
     borderColor: "#4ac1f9",
-    borderRadius: 10,
-    marginBottom: 10,
+    borderRadius: calculateResponsiveHeight(10),
+    marginBottom: calculateResponsiveHeight(10),
     justifyContent: "center",
     alignItems: "center",
   },
   actionBox: {
-    height: 132,
+    height: calculateResponsiveHeight(132),
     alignSelf: "stretch",
-    backgroundColor: "#65729a",
-    borderRadius: 10,
+    backgroundColor: "#323a5d",
+    borderRadius: calculateResponsiveHeight(10),
     overflow: "hidden",
-    marginBottom: 10,
+    marginBottom: calculateResponsiveHeight(10),
   },
   actionTop: {
     flexDirection: "row",
-    height: 83,
+    height: calculateResponsiveHeight(83),
+    backgroundColor: "#65729a",
   },
   actionImage: {
-    width: 100,
+    width: calculateResponsiveWidth(100),
     height: "100%",
+  },
+  actionBottom: {
+    marginTop: calculateResponsiveHeight(5),
+    marginLeft: calculateResponsiveWidth(5),
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
 });

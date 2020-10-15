@@ -6,9 +6,8 @@ import {
 import {
   calculateResponsiveHeight,
   calculateResponsiveWidth,
-} from "../utils/responsive";
+} from "../../utils/responsive";
 import React from "react";
-import BoxShadow from "react-native-shadow";
 
 interface Button {
   onPress: () => void;

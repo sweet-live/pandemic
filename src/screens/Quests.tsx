@@ -18,7 +18,8 @@ import {
 } from "../utils/responsive";
 import BookIcon from "../assets/svg/stats/BookIcon";
 import LinearGradient from "react-native-linear-gradient";
-import Button from "../components/Button";
+import Button from "../components/utilities/Button";
+import LoadingBar from "../components/utilities/LoadingBar";
 interface QuestsI {
   title: string;
   reward: string;
@@ -135,18 +136,12 @@ const Quests = () => {
                       </Text>
                     </View>
                   </View>
-                  <View style={styles.barcontainer}>
-                    {/* <LinearGradient colors={['#3cd5ff','#2183b2']} style = {[styles.bar,
-														{width: calculateResponsiveWidth(item.status.current/item.status.required*305)} ]}/> */}
-                    <View
-                      style={[
-                        styles.progressbar,
-                        {
-                          width: calculateResponsiveWidth(
-                            (item.status.current / item.status.required) * 305
-                          ),
-                        },
-                      ]}
+                  <View style={{ marginTop: calculateResponsiveHeight(8) }}>
+                    <LoadingBar
+                      width={305}
+                      current={item.status.current}
+                      total={item.status.required}
+                      backgroundColor="#48527b"
                     />
                   </View>
                 </View>
@@ -227,6 +222,7 @@ const styles = StyleSheet.create({
   },
   questreward: {
     flexDirection: "row",
+    justifyContent: "center",
   },
   questprogress: {
     flexDirection: "row",
@@ -239,6 +235,7 @@ const styles = StyleSheet.create({
   reward: {
     fontFamily: "Montserrat-Bold",
     color: "#fff",
+    fontSize: calculateResponsiveHeight(10),
   },
   progresstext: {
     fontFamily: "Montserrat",

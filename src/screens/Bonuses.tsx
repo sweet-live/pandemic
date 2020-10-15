@@ -19,7 +19,7 @@ import {
 import WheelIcon from "../assets/svg/WheelIcon";
 import LinearGradient from "react-native-linear-gradient";
 import Wheel from "../components/Wheel";
-import Button from "../components/Button";
+import Button from "../components/utilities/Button";
 
 const Bonuses = () => {
   const [spinsLeft, decreaseSpins] = useState(1);
