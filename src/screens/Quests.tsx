@@ -20,9 +20,11 @@ import BookIcon from "../assets/svg/stats/BookIcon";
 import LinearGradient from "react-native-linear-gradient";
 import Button from "../components/utilities/Button";
 import LoadingBar from "../components/utilities/LoadingBar";
+import CrossIcon from "../assets/svg/CrossIcon";
+import { formatPrice } from "../utils/stringFormatting";
 interface QuestsI {
   title: string;
-  reward: string;
+  reward: number;
   status: {
     current: number;
     required: number;
@@ -30,14 +32,14 @@ interface QuestsI {
   type: string;
 }
 
-const Quests = () => {
+const Quests = ({ navigation }) => {
   const [selectedType, setSelectedType] = useState("Vaccine");
   const data: QuestsI[] = [
     {
       title: "Upgrade Vaccine to Level 5",
-      reward: "25,000",
+      reward: 25000,
       status: {
-        current: 4,
+        current: 5,
         required: 5,
       },
       type: "Vaccine",
@@ -45,7 +47,7 @@ const Quests = () => {
 
     {
       title: "Upgrade Vaccine to Level 10",
-      reward: "15,000",
+      reward: 15000,
       status: {
         current: 4,
         required: 10,
@@ -55,7 +57,7 @@ const Quests = () => {
 
     {
       title: "Upgrade Vaccine to Level 15",
-      reward: "50,000",
+      reward: 50000,
       status: {
         current: 4,
         required: 15,
@@ -65,7 +67,7 @@ const Quests = () => {
 
     {
       title: "Upgrade Vaccine to Level 20",
-      reward: "50,000",
+      reward: 50000,
       status: {
         current: 4,
         required: 20,
@@ -75,7 +77,7 @@ const Quests = () => {
 
     {
       title: "Upgrade Vaccine to Level 25",
-      reward: "75,000",
+      reward: 75000,
       status: {
         current: 4,
         required: 25,
@@ -88,9 +90,24 @@ const Quests = () => {
   }
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          top: calculateResponsiveHeight(20),
+          right: calculateResponsiveWidth(20),
+          position: "absolute",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <CrossIcon width={calculateResponsiveWidth(20)}></CrossIcon>
+        </TouchableOpacity>
+      </View>
       <View style={styles.title}>
         <View style={styles.boosticon}>
-          <BookIcon height={17} fill={"#4ac1f9"} />
+          <BookIcon height={calculateResponsiveHeight(17)} fill={"#4ac1f9"} />
         </View>
         <Text style={styles.titletext}>QUESTS</Text>
       </View>
@@ -120,14 +137,42 @@ const Quests = () => {
           keyExtractor={(item, index) => `quest-item-${index}`}
           renderItem={({ item, index }) => {
             console.log((item.status.current / item.status.required) * 305);
-            return (
+            return item.status.current == item.status.required ? (
+              <View
+                style={[
+                  styles.questbox,
+                  {
+                    backgroundColor: "#48c665",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                ]}
+              >
+                <Text style={styles.questdesc}>
+                  Quest Completed Successfully!
+                </Text>
+                <Text
+                  style={[
+                    styles.rewardtext,
+                    { fontSize: calculateResponsiveHeight(14) },
+                  ]}
+                >
+                  Reward:{" "}
+                  <Text style={styles.questdesc}>
+                    {formatPrice(item.reward)}
+                  </Text>
+                </Text>
+              </View>
+            ) : (
               <View style={styles.questbox}>
                 <View style={styles.questcontainer}>
                   <Text style={styles.questdesc}>{item.title}</Text>
                   <View style={styles.questinfo}>
                     <View style={styles.questreward}>
                       <Text style={styles.rewardtext}>Reward: </Text>
-                      <Text style={styles.reward}>${item.reward}</Text>
+                      <Text style={styles.reward}>
+                        {formatPrice(item.reward)}
+                      </Text>
                     </View>
                     <View style={styles.questprogress}>
                       <Text style={styles.progresstext}>Status: </Text>
@@ -161,7 +206,7 @@ const styles = StyleSheet.create({
     color: "black",
     padding: calculateResponsiveWidth(20),
     paddingBottom: 0,
-    paddingTop: calculateResponsiveHeight(30),
+    paddingTop: calculateResponsiveHeight(21),
   },
   questtypecontainer: {
     flexDirection: "row",
@@ -190,7 +235,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: calculateResponsiveHeight(21),
   },
   titletext: {
     fontFamily: "Montserrat-Bold",

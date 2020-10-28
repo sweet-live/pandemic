@@ -1,8 +1,6 @@
 import { StyleSheet, Text } from "react-native";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { TouchableHighlight, TouchableOpacity } from "react-native";
+
 import {
   calculateResponsiveHeight,
   calculateResponsiveWidth,
@@ -32,8 +30,8 @@ const Button: React.FunctionComponent<Button> = ({
       disabled={disabled}
       style={[
         styles.container,
-        { ...containerStyles },
         active && !disabled && styles.containerActive,
+        { ...containerStyles },
       ]}
     >
       <Text

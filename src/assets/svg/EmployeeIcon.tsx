@@ -1,41 +1,41 @@
 import * as React from "react";
 import { View } from "react-native";
-import { Svg, Path, G, Circle } from "react-native-svg";
+import { Svg, Path, G } from "react-native-svg";
 import SvgProps from "../../interfaces/SvgProps";
 import { calculateResponsiveWidth } from "../../utils/responsive";
 
-interface EmployeeIconI {
-  d: number;
-  fill?: string;
-  marginRight?: number;
-}
-
-const EmployeeIcon: React.FunctionComponent<EmployeeIconI> = ({
-  d,
-  fill = " #fff",
-  marginRight = 0,
-}) => {
+const EmployeeIcon: React.SFC<SvgProps> = ({ width, height, fill }) => {
   return (
-    <View
-      style={{
-        width: d,
-        height: d,
-        aspectRatio: 1,
-        marginRight: marginRight,
-      }}
-    >
-      <Svg width="100%" height="100%" viewBox="0 0 15 15">
-        <G fill="none" fill-rule="evenodd" stroke={fill}>
-          <Circle cx="7.5" cy="7.5" r="7" />
-          <G stroke-linecap="round">
-            <Path
-              d="M6.708 6.333c0-1.104-1.492-2.666-3.333-2.666-1.841 0-3.333 1.562-3.333 2.666"
-              transform="translate(4 4)"
-            />
-            <Path
-              d="M3.375 3.668c1.013 0 1.833-.82 1.833-1.833S4.388 0 3.375 0c-1.012 0-1.833.821-1.833 1.834 0 1.012.82 1.833 1.833 1.833h0z"
-              transform="translate(4 4)"
-            />
+    <View style={{ width: width, height: height, aspectRatio: 1 }}>
+      <Svg width="100%" height="100%" viewBox="0 0 42 44">
+        <G
+          id="Page-1"
+          stroke={fill}
+          stroke-width="1.9"
+          fill="none"
+          fill-rule="evenodd"
+          stroke-linecap="round"
+        >
+          <G
+            id="Daily-reward-screen-Copy"
+            transform="translate(-46.000000, -475.000000)"
+            stroke={fill}
+            stroke-width="100"
+          >
+            <G id="Icon" transform="translate(48.000000, 477.000000)">
+              <Path
+                d="M38.0952381,32.4285714 C38.0952381,26.1171429 29.567619,21 19.047619,21 C8.52761905,21 0,26.1171429 0,32.4285714"
+                id="Stroke-13"
+              />
+              <Path
+                d="M19.4761905,20.952381 C25.2619048,20.952381 29.952381,16.2619048 29.952381,10.4761905 C29.952381,4.69047619 25.2619048,0 19.4761905,0 C13.6904762,0 9,4.69047619 9,10.4761905 C9,16.2619048 13.6904762,20.952381 19.4761905,20.952381 L19.4761905,20.952381 Z"
+                id="Stroke-15"
+              />
+              <Path
+                d="M38.0952381,32 L38.0952381,38.252381 C38.0952381,38.8104762 37.9057143,39.6190476 37.3533333,39.6190476 L1.21809524,39.6190476 C0.677142857,39.6190476 0,38.8038095 0,38.252381 L0,32"
+                id="Stroke-17"
+              />
+            </G>
           </G>
         </G>
       </Svg>
@@ -43,4 +43,9 @@ const EmployeeIcon: React.FunctionComponent<EmployeeIconI> = ({
   );
 };
 
+EmployeeIcon.defaultProps = {
+  width: "auto",
+  height: "auto",
+  fill: "#fff",
+};
 export default EmployeeIcon;

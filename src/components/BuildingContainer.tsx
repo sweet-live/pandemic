@@ -1,8 +1,8 @@
 import React from "react";
 import { View, ImageBackground, Text, StyleSheet } from "react-native";
 import FastImage from "react-native-fast-image";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import EmployeeIcon from "../assets/svg/EmployeeIcon";
+import { TouchableOpacity } from "react-native";
+import EmployeeIconCircle from "../assets/svg/EmployeeIconCircle";
 import PaperClipIcon from "../assets/svg/PaperClipIcon";
 import {
   calculateResponsiveHeight,
@@ -10,7 +10,12 @@ import {
 } from "../utils/responsive";
 import Button from "./utilities/Button";
 import LoadingBar from "./utilities/LoadingBar";
-
+import {
+  getResultNumber,
+  getResultText,
+  secondsToString,
+  formatPrice,
+} from "../utils/stringFormatting";
 interface BuildingContainerI {
   title: string;
   level: number;
@@ -23,6 +28,8 @@ interface BuildingContainerI {
   employees: 0 | 1 | 2 | 3;
   upgradePrice: number;
   picture: any;
+  affordable: boolean;
+  navigation: any;
 }
 
 const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
@@ -37,7 +44,17 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
   employees,
   upgradePrice,
   picture,
+  affordable,
+  navigation,
 }) => {
+  const btnStyles = (condition: boolean) => {
+    return condition
+      ? {
+          borderWidth: 0,
+          backgroundColor: "#404970",
+        }
+      : {};
+  };
   return (
     <View style={styles.actionBox}>
       <View style={styles.actionTop}>
@@ -58,29 +75,13 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
           </TouchableOpacity>
         </View>
         <View style={styles.infoContainer}>
-          {/* <Text style={styles.itemTitle}>
-            {title}
-            <Text
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: calculateResponsiveHeight(8),
-                marginLeft: 5,
-              }}
-            >
-              Level:{" "}
-              <Text
-                style={[styles.textInfo, { fontFamily: "Montserrat-Bold" }]}
-              >
-                {level}
-              </Text>
-            </Text>
-          </Text> */}
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
                 fontFamily: "Montserrat-Bold",
                 color: "#fff",
                 fontSize: calculateResponsiveHeight(14),
+                height: calculateResponsiveHeight(14),
               }}
             >
               {title}
@@ -89,7 +90,7 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
               style={{
                 marginLeft: 5,
                 flexDirection: "row",
-                alignItems: "center",
+                alignItems: "flex-end",
               }}
             >
               <Text
@@ -113,10 +114,14 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
             </View>
           </View>
           <Text style={styles.textCategory}>
-            {result1Text} <Text style={styles.textInfo}>{result1}</Text>
+            {result1Text}{" "}
+            <Text style={styles.textInfo}>{getResultNumber(result1)}</Text>
+            {getResultText(result2)}
           </Text>
           <Text style={styles.textCategory}>
-            {result2Text} <Text style={styles.textInfo}>{result2}</Text>
+            {result2Text}{" "}
+            <Text style={styles.textInfo}>{getResultNumber(result2)}</Text>
+            {getResultText(result2)}
           </Text>
           <View style={{ marginTop: calculateResponsiveHeight(7) }}>
             <LoadingBar
@@ -142,7 +147,7 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
                 { fontSize: calculateResponsiveHeight(8) },
               ]}
             >
-              {timeNow}
+              {secondsToString(timeTotal - timeNow)}
             </Text>
             <Text
               style={[
@@ -156,12 +161,14 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
         </View>
       </View>
       <View />
+
       <View style={styles.actionBottom}>
-        <View>
+        <View style={{ marginLeft: calculateResponsiveWidth(15) }}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
+              marginBottom: calculateResponsiveHeight(4),
             }}
           >
             <Text
@@ -173,60 +180,69 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
             >
               UPGRADE PRICE:
             </Text>
-
             <Text
               style={{
-                marginLeft: calculateResponsiveWidth(5),
                 fontSize: calculateResponsiveHeight(14),
                 fontFamily: "Montserrat-Bold",
                 color: "#fff",
               }}
             >
-              {upgradePrice}
+              {" "}
+              {formatPrice(upgradePrice)}
             </Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 4,
-            }}
-          >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text
               style={{
                 fontSize: calculateResponsiveHeight(7),
                 fontFamily: "Montserrat-Bold",
                 color: "#fff",
-                marginRight: calculateResponsiveWidth(5),
               }}
             >
               EMPLOYEES:
             </Text>
-            <EmployeeIcon
-              d={calculateResponsiveWidth(15)}
-              fill={employees >= 1 ? "#48c665" : "#fff"}
-              marginRight={calculateResponsiveWidth(5)}
-            />
-            <EmployeeIcon
-              d={calculateResponsiveWidth(15)}
-              fill={employees >= 2 ? "#48c665" : "#fff"}
-              marginRight={calculateResponsiveWidth(5)}
-            />
-            <EmployeeIcon
-              d={calculateResponsiveWidth(15)}
-              fill={employees >= 3 ? "#48c665" : "#fff"}
-            />
+            <TouchableOpacity
+              style={{ flexDirection: "row" }}
+              onPress={() => {
+                console.log(title, employees);
+                navigation.navigate("Employees", {
+                  title,
+                  employees,
+                });
+              }}
+            >
+              <EmployeeIconCircle
+                d={calculateResponsiveWidth(15)}
+                fill={employees >= 1 ? "#48c665" : "#65729a"}
+                marginLeft={5}
+              />
+              <EmployeeIconCircle
+                d={calculateResponsiveWidth(15)}
+                fill={employees >= 2 ? "#48c665" : "#65729a"}
+                marginLeft={5}
+              />
+              <EmployeeIconCircle
+                d={calculateResponsiveWidth(15)}
+                fill={employees >= 3 ? "#48c665" : "#65729a"}
+                marginLeft={5}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-
         <Button
           onPress={() => {}}
-          text="UPGRADE"
-          containerStyles={{
-            width: calculateResponsiveWidth(125),
-            height: calculateResponsiveHeight(39),
-          }}
-        ></Button>
+          text={affordable ? "UPGRADE" : "NO FUNDS"}
+          disabled={!affordable}
+          containerStyles={
+            {
+              width: calculateResponsiveWidth(125),
+              height: calculateResponsiveHeight(39),
+              marginRight: calculateResponsiveWidth(5),
+              ...btnStyles(!affordable),
+            }
+            //true && styles.noFond,
+          }
+        />
       </View>
     </View>
   );
@@ -235,6 +251,7 @@ const BuildingContainer: React.FunctionComponent<BuildingContainerI> = ({
 export default BuildingContainer;
 
 const styles = StyleSheet.create({
+  noFond: {},
   underProgressBar: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -280,9 +297,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   actionBottom: {
-    marginTop: calculateResponsiveHeight(5),
-    marginLeft: calculateResponsiveWidth(5),
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex: 1,
   },
 });

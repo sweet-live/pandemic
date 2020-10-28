@@ -39,29 +39,44 @@ import Animated, {
   debug,
 } from "react-native-reanimated";
 import {} from "react-native-redash";
+import GoalTriangle from "../assets/svg/GoalTriangle";
 
-const Wheel = ({ d }) => {
+interface Wheel {
+  d: number;
+}
+const Wheel: React.FunctionComponent<Wheel> = ({ d }) => {
   return (
-    <Animated.View
-      style={[
-        styles.mainwheel,
-        {
-          width: d,
-          height: d,
-          borderRadius: d / 2,
-        },
-      ]}
+    <View
+      style={{
+        alignItems: "center",
+        width: d,
+        height: d + calculateResponsiveHeight(16.5),
+      }}
     >
-      <WheelTriangle d={d} text="YES" rotate="0deg" color="#48527b" />
-      <WheelTriangle d={d} text="YES" rotate="45deg" color="#65729a" />
-      <WheelTriangle d={d} text="YES" rotate="90deg" color="#48527b" />
-      <WheelTriangle d={d} text="YES" rotate="135deg" color="#4ac1f9" />
-      <WheelTriangle d={d} text="YES" rotate="180deg" color="#48527b" />
-      <WheelTriangle d={d} text="YES" rotate="225deg" color="#65729a" />
-      <WheelTriangle d={d} text="YES" rotate="270deg" color="#48527b" />
-      <WheelTriangle d={d} text="YES" rotate="315deg" color="#4ac1f9" />
-      <WheelTriangle d={d} text="YES" rotate="360deg" color="#48527b" />
-    </Animated.View>
+      <Animated.View
+        style={[
+          styles.mainwheel,
+          {
+            width: d,
+            height: d,
+            borderRadius: d / 2,
+          },
+        ]}
+      >
+        <WheelTriangle d={d} text="YES" rotate="0deg" color="#48527b" />
+        <WheelTriangle d={d} text="YES" rotate="45deg" color="#65729a" />
+        <WheelTriangle d={d} text="YES" rotate="90deg" color="#48527b" />
+        <WheelTriangle d={d} text="YES" rotate="135deg" color="#4ac1f9" />
+        <WheelTriangle d={d} text="YES" rotate="180deg" color="#48527b" />
+        <WheelTriangle d={d} text="YES" rotate="225deg" color="#65729a" />
+        <WheelTriangle d={d} text="YES" rotate="270deg" color="#48527b" />
+        <WheelTriangle d={d} text="YES" rotate="315deg" color="#4ac1f9" />
+        <WheelTriangle d={d} text="YES" rotate="360deg" color="#48527b" />
+      </Animated.View>
+      <View style={styles.trianglecontainer}>
+        <GoalTriangle></GoalTriangle>
+      </View>
+    </View>
   );
 };
 
@@ -94,17 +109,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 10,
     fontFamily: "Montserrat-Bold",
-  },
-  triangle: {
-    position: "absolute",
-    width: 0,
-    height: 0,
-    backgroundColor: "transparent",
-    borderStyle: "solid",
-    borderTopWidth: 200,
-    borderRightWidth: 200,
-    borderRightColor: "red",
-    borderTopColor: "transparent",
   },
 });
 

@@ -1,14 +1,17 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 
-import { Home, Boosts, Quests, Bonuses } from "../screens/index";
+import { Home, Boosts, Quests, Bonuses, Employees } from "../screens/index";
 import BottomTabNavigator from "../components/navigation/BottomTabNavigator";
+import MainMenu from "../components/navigation/MainMenu";
 const tabsNavigation = createBottomTabNavigator(
   {
     Home,
     Boosts,
     Quests,
-    Bonuses
+    Bonuses,
+    Employees,
   },
   {
     initialRouteName: "Home",
@@ -19,12 +22,22 @@ const tabsNavigation = createBottomTabNavigator(
   }
 );
 
-const AppNavigation = createSwitchNavigator(
+const drawerNavigation = createDrawerNavigator(
   {
     tabsNavigation,
   },
   {
     initialRouteName: "tabsNavigation",
+    contentComponent: MainMenu,
+  }
+);
+
+const AppNavigation = createSwitchNavigator(
+  {
+    drawerNavigation,
+  },
+  {
+    initialRouteName: "drawerNavigation",
   }
 );
 

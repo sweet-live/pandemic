@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import BoostsIcon from "../assets/svg/stats/BoostsIcon";
 import DiamondIcon from "../assets/svg/DiamondIcon";
@@ -14,6 +15,7 @@ import {
   calculateResponsiveHeight,
   calculateResponsiveWidth,
 } from "../utils/responsive";
+import CrossIcon from "../assets/svg/CrossIcon";
 
 interface BoostsI {
   title: string;
@@ -24,7 +26,7 @@ interface BoostsI {
   };
 }
 
-const Boosts = () => {
+const Boosts = ({ navigation }) => {
   const data: BoostsI[] = [
     {
       title: "All profit x2",
@@ -65,6 +67,21 @@ const Boosts = () => {
   ];
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          top: calculateResponsiveHeight(20),
+          right: calculateResponsiveWidth(20),
+          position: "absolute",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <CrossIcon width={calculateResponsiveWidth(20)}></CrossIcon>
+        </TouchableOpacity>
+      </View>
       <View style={styles.title}>
         <View style={styles.boosticon}>
           <BoostsIcon height={20} fill={"#4ac1f9"} />
@@ -77,7 +94,7 @@ const Boosts = () => {
             <Text style={styles.boostdesc}>All proffits x2</Text>
             <View style={styles.boostprice}>
               <Text style={styles.pricetext}>Price:</Text>
-              <DiamondIcon height={9} fill="#4ac1f9" />
+              <DiamondIcon height={10} fill="#4ac1f9" />
               <Text style={styles.price}>10</Text>
             </View>
           </View>
@@ -101,7 +118,7 @@ const Boosts = () => {
                   <Text style={styles.boostdesc}>{item.title}</Text>
                   <View style={styles.boostprice}>
                     <Text style={styles.pricetext}>Price:</Text>
-                    <DiamondIcon height={9} fill="#4ac1f9" />
+                    <DiamondIcon height={10} fill="#4ac1f9" />
                     <Text style={styles.price}>{item.price}</Text>
                     {item.discount && (
                       <View
@@ -143,13 +160,12 @@ const styles = StyleSheet.create({
     color: "black",
     padding: calculateResponsiveHeight(5),
     paddingBottom: 0,
-    paddingTop: calculateResponsiveHeight(30),
+    paddingTop: calculateResponsiveHeight(21),
   },
   title: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: calculateResponsiveHeight(21),
   },
   titletext: {
     fontFamily: "Montserrat-Bold",

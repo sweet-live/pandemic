@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="44px" viewBox="0 0 42 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Daily-reward-screen-Copy" transform="translate(-46.000000, -475.000000)" stroke="#FFFFFF" stroke-width="3.80952381">
+            <g id="Icon" transform="translate(48.000000, 477.000000)">
+                <path d="M38.0952381,32.4285714 C38.0952381,26.1171429 29.567619,21 19.047619,21 C8.52761905,21 0,26.1171429 0,32.4285714" id="Stroke-13"></path>
+                <path d="M19.4761905,20.952381 C25.2619048,20.952381 29.952381,16.2619048 29.952381,10.4761905 C29.952381,4.69047619 25.2619048,0 19.4761905,0 C13.6904762,0 9,4.69047619 9,10.4761905 C9,16.2619048 13.6904762,20.952381 19.4761905,20.952381 L19.4761905,20.952381 Z" id="Stroke-15"></path>
+                <path d="M38.0952381,32 L38.0952381,38.252381 C38.0952381,38.8104762 37.9057143,39.6190476 37.3533333,39.6190476 L1.21809524,39.6190476 C0.677142857,39.6190476 0,38.8038095 0,38.252381 L0,32" id="Stroke-17"></path>
+            </g>
+        </g>
+    </g>
+</svg>

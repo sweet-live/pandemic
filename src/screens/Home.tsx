@@ -19,25 +19,26 @@ import {
   calculateResponsiveHeight,
   calculateResponsiveWidth,
 } from "../utils/responsive";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import BookIcon from "../assets/svg/stats/BookIcon";
 import WheelIcon from "../assets/svg/WheelIcon";
 import PaperClipIcon from "../assets/svg/PaperClipIcon";
 import { processFontFamily } from "expo-font";
 import LoadingBar from "../components/utilities/LoadingBar";
 import Button from "../components/utilities/Button";
-import EmployeeIcon from "../assets/svg/EmployeeIcon";
+import EmployeeIconCircle from "../assets/svg/EmployeeIconCircle";
 import BuildingContainer from "../components/BuildingContainer";
 
 //Images
 import doctor from "../assets/images/doctor.png";
+import hotel from "../assets/images/doctor.png";
 
 // interface UpgradeBuildingsI {
 // 	title: string;
 // 	level: number;
 // 	result: }
 
-export default function Home() {
+export default function Home({ navigation }) {
   // const data: any[] = [
   // 	{
   // 		title: "Services",
@@ -61,7 +62,7 @@ export default function Home() {
       <View style={styles.currencies}>
         <View style={styles.currenciesItem}>
           <SyringeIcon height={iconDim} fill={"#4ac1f9"} />
-          <Text style={styles.currenciesItemValue}>123</Text>
+          <Text style={styles.currenciesItemValue}>243.3k</Text>
           <TouchableOpacity style={styles.currenciesAddCurrency}>
             <PlussIcon height={plusDim} />
           </TouchableOpacity>
@@ -75,7 +76,7 @@ export default function Home() {
         </View>
         <View style={styles.currenciesItem}>
           <BoostIcon height={iconDim} fill={"#4ac1f9"} />
-          <Text style={styles.currenciesItemValue}>123</Text>
+          <Text style={styles.currenciesItemValue}>x1</Text>
           <TouchableOpacity style={styles.currenciesAddCurrency}>
             <PlussIcon height={plusDim} />
           </TouchableOpacity>
@@ -101,14 +102,14 @@ export default function Home() {
               <EnergyIcon height={14} fill={"#4ac1f9"} />
               <View style={{ flexDirection: "row", marginLeft: 5 }}>
                 <Text style={styles.statsNumber}>49</Text>
-                <Text style={styles.infectedText}> /100</Text>
+                <Text style={styles.infectedText}> / 100</Text>
               </View>
             </View>
             <View style={styles.playerStatsItem}>
               <HealthIcon height={14} fill={"#4ac1f9"} />
               <View style={{ flexDirection: "row", marginLeft: 5 }}>
                 <Text style={styles.statsNumber}>7</Text>
-                <Text style={styles.infectedText}> /10</Text>
+                <Text style={styles.infectedText}> / 10</Text>
               </View>
             </View>
             <View style={styles.playerStatsItem}>
@@ -124,13 +125,22 @@ export default function Home() {
       <View style={styles.gameScreen}>
         <View style={styles.sideMenu}>
           <TouchableOpacity style={styles.sideMenuItem}>
-            <BookIcon height={calculateResponsiveHeight(25)} fill="#fff" />
+            <View style={styles.notification}>
+              <Text style={styles.notificationtext}>1</Text>
+            </View>
+            <BookIcon height={calculateResponsiveHeight(20)} fill="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideMenuItem}>
-            <BoostIcon height={calculateResponsiveHeight(25)} />
+            <View style={styles.notification}>
+              <Text style={styles.notificationtext}>3</Text>
+            </View>
+            <BoostIcon height={calculateResponsiveHeight(20)} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideMenuItem}>
-            <WheelIcon height={calculateResponsiveHeight(25)} fill="#fff" />
+            <View style={styles.notification}>
+              <Text style={styles.notificationtext}>4</Text>
+            </View>
+            <WheelIcon height={calculateResponsiveHeight(20)} fill="#fff" />
           </TouchableOpacity>
         </View>
 
@@ -168,6 +178,7 @@ export default function Home() {
                     height={4}
                     current={70}
                     total={100}
+                    foregroundColor="#ff685c"
                     backgroundColor="#48527b"
                   />
                 </View>
@@ -201,13 +212,12 @@ export default function Home() {
             </View>
             <View />
             <View style={styles.actionBottom}>
-              <View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+              <View
+                style={{
+                  marginLeft: calculateResponsiveWidth(15),
+                }}
+              >
+                <View>
                   <Text
                     style={{
                       fontSize: calculateResponsiveHeight(7),
@@ -220,7 +230,6 @@ export default function Home() {
 
                   <Text
                     style={{
-                      marginLeft: calculateResponsiveWidth(5),
                       fontSize: calculateResponsiveHeight(14),
                       fontFamily: "Montserrat-Bold",
                       color: "#fff",
@@ -229,45 +238,17 @@ export default function Home() {
                     $10,000
                   </Text>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 4,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: calculateResponsiveHeight(7),
-                      fontFamily: "Montserrat-Bold",
-                      color: "#fff",
-                      marginRight: calculateResponsiveWidth(5),
-                    }}
-                  >
-                    EMPLOYEES:
-                  </Text>
-                  <EmployeeIcon
-                    d={calculateResponsiveWidth(15)}
-                    fill="#48c665"
-                    marginRight={calculateResponsiveWidth(5)}
-                  />
-                  <EmployeeIcon
-                    d={calculateResponsiveWidth(15)}
-                    fill="#fff"
-                    marginRight={calculateResponsiveWidth(5)}
-                  />
-                  <EmployeeIcon d={calculateResponsiveWidth(15)} fill="#fff" />
-                </View>
               </View>
-
               <Button
                 onPress={() => {}}
                 text="UPGRADE"
                 containerStyles={{
                   width: calculateResponsiveWidth(125),
                   height: calculateResponsiveHeight(39),
+                  marginRight: calculateResponsiveWidth(5),
+                  backgroundColor: "#ff685c",
                 }}
-              ></Button>
+              />
             </View>
           </View>
 
@@ -278,12 +259,28 @@ export default function Home() {
             result1="20 people per click"
             result2Text="Earnings: "
             result2="$550 per min"
-            timeNow={70}
-            timeTotal={100}
+            timeNow={50}
+            timeTotal={500}
+            employees={1}
+            upgradePrice={25000}
+            affordable={false}
+            picture={doctor}
+            navigation={navigation}
+          />
+          <BuildingContainer
+            title="Hospital"
+            level={0}
+            result1Text="Saving: "
+            result1="20 people per click"
+            result2Text="Earnings: "
+            result2="$550 per min"
+            timeNow={50}
+            timeTotal={500}
             employees={0}
             upgradePrice={140000}
+            affordable={false}
             picture={doctor}
-          ></BuildingContainer>
+          />
           <View style={styles.actionBox}>
             <View style={styles.actionTop}>
               <View style={styles.actionImage}>
@@ -324,6 +321,22 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
+  notification: {
+    width: calculateResponsiveHeight(18),
+    height: calculateResponsiveHeight(18),
+    backgroundColor: "#ff685c",
+    borderRadius: calculateResponsiveHeight(9),
+    alignItems: "center",
+    justifyContent: "center",
+    left: calculateResponsiveWidth(37),
+    bottom: calculateResponsiveWidth(37),
+    position: "absolute",
+  },
+  notificationtext: {
+    fontFamily: "Montserrat-Bold",
+    color: "#fff",
+    fontSize: calculateResponsiveHeight(10),
+  },
   underProgressBar: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -376,7 +389,7 @@ const styles = StyleSheet.create({
   },
   currenciesItemValue: {
     color: "#fff",
-    fontSize: calculateResponsiveHeight(13),
+    fontSize: calculateResponsiveHeight(12),
     fontFamily: "Montserrat-Bold",
   },
   currenciesAddCurrency: {
@@ -461,6 +474,7 @@ const styles = StyleSheet.create({
     marginBottom: calculateResponsiveHeight(10),
     justifyContent: "center",
     alignItems: "center",
+    overflow: "visible",
   },
   actionBox: {
     height: calculateResponsiveHeight(132),
@@ -480,9 +494,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   actionBottom: {
-    marginTop: calculateResponsiveHeight(5),
-    marginLeft: calculateResponsiveWidth(5),
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex: 1,
   },
 });
